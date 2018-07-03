@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+	<title>Jogo da Memoria</title>
+
+
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<div class="container">
+			<div class="navbar-header">
+		  		<a class="navbar-brand" href="#"></a>
+			
+			</div>
+		</div>
+	</nav>
+
+	  <br><br> 
+
+	  <div class="container" >  
+
+		<h1 style="text-align: center">Bem-vindo(a) ao Jogo da Memória</h1>
+
+				
+		<p>Antes de começar diga seu nome e sua idade</p>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="input-group">
+					<div class="input-group-prepend">
+				    	<span class="input-group-text" >Nome</span>
+				  	</div>
+				  	<input type="text" class="form-control" id="nome">
+				</div>
+			</div>
+
+			<div class="col-md-2">
+				<div class="input-group">
+					<div class="input-group-prepend">
+				    	 <span class="input-group-text" >Idade</span> 
+				  	</div>
+				  	<input type="text" class="form-control" id="idade">
+				</div>
+			</div>
+		</div> <!-- fim da row -->
+
+		<br><br>
+
+		<div class="row">
+
+			<div class="col-md-4">
+				<img src="img/iniciar.png" onclick="iniciaJogo()">Iniciar Jogo
+			</div>
+
+			<div class="col-md-2"></div>
+
+			<div class="col-md-6">
+				<img src="img/baralho.jpg" height="500px" width="620px">
+			</div>
+			
+		</div> <!-- fim da row -->
+
+	  </div> <!-- fim container -->
+
+
+		<script language='Javascript'>
+
+			function iniciaJogo() {
+
+				var nome = document.getElementById('nome').value;
+				var idade = document.getElementById('idade').value;
+
+				// window.location.href = 'jogo.html?' +nome+ idade;
+
+				 alert(nome);
+				 alert(idade);
+			}
+			
+		</script>	
+
+	
+
+</body>
+</html>
