@@ -1,9 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+	<title>Jogo da Memoria</title>
 </head>
-<body>
 
+<body>
+	<h1> testando </h1>
+
+	<div id="deck"></div>
+
+
+	<script type="text/javascript">
+
+		var totalCards = 7;
+
+		var naipes = ["Espadas","Ouros","Paus","Copas"];
+		var cartas = [];
+
+
+		function createElements(){
+			for(var i = 0; i < totalCards; i++){
+				var cardNumber = Math.floor(Math.random() * totalCards);
+				var newCard = new Carta(cardNumber);
+				var newImage = document.createElement("img");
+				var path = "img/" + newCard.numero + newCard.naipe + ".png";
+				newImage.setAttribute('src', path);
+				var div = document.getElementById("deck");
+				div.appendChild(newImage);
+				cartas.push(newCard);
+			}
+		};
+
+		function exibeCartas(){
+			for(var i = 0; i < cartas.length; i++){
+				console.log("Naipe da carta: " + cartas[i].naipe + " | Numero da carta: " + cartas[i].numero);
+			}
+		}
+
+		function verifica(){
+			var variety = 0;
+			for (var i = 0; i < cartas.length; i++){
+				if (cartas[i].numero == this.numero){
+					variety++;
+				}
+			}
+			return variety;
+		}
+
+
+		function Carta(numero){
+			this.numero = numero;
+			this.naipe = setNaipe();
+
+			function setNaipe(){
+				var variety = verifica();
+
+				if(variety == 0){
+					var proximo = Math.floor(Math.random() * naipes.length);
+					console.log("passou aqui");
+					return naipes[proximo];
+
+				}
+				else{
+					for(var i = 0; i < cartas.length; i++){
+						for(var j = 0; j < naipes.length; j++){
+							if(cartas[i].numero == this.numero && cartas[i].naipe != naipes[j]){
+								console.log("Naipe escolhido foi: " + naipes[j]);
+								return naipes[j];
+							}
+						}
+					}
+				}
+			}
+		}; //Fim do objeto
+
+
+		createElements(); //Chamando a função para criar novas cartas
+		exibeCartas(); //exibe cartas criadas no console
+
+	</script>
 </body>
-</html>
