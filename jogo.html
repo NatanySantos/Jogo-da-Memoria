@@ -10,41 +10,82 @@
 <body>
 	<h1> testando </h1>
 
-	<div id="deck"></div>
+	<div id="deck" ></div>
+	<div id="deck2"></div>
 
 
 	<script type="text/javascript">
 
-		var totalCards = 7;
+		var totalCards = 20;
 
-		var naipes = ["Espadas","Ouros","Paus","Copas"];
+		var naipes = ["E","O","P","C"];
 		var cartas = [];
 
 
 		function createElements(){
-			for(var i = 0; i < totalCards; i++){
-				var cardNumber = Math.floor(Math.random() * totalCards);
+			for(var i = 1; i <= 10; i++){
+				var cardNumber = Math.floor(Math.random() * 13 + 1);
 				var newCard = new Carta(cardNumber);
 				var newImage = document.createElement("img");
 				var path = "img/" + newCard.numero + newCard.naipe + ".png";
 				newImage.setAttribute('src', path);
+				newImage.setAttribute('width', '135px');
 				var div = document.getElementById("deck");
 				div.appendChild(newImage);
 				cartas.push(newCard);
+
+			}
+							
+		};
+
+		function selectCards(){
+			var vetor = [0,0,0,0,0,0,0,0,0,0];
+			var verifica;
+
+			for(var j = 1; j<= 10; j++){
+				verifica = true;
+				
+				while(verifica){
+				var i = Math.floor(Math.random() * cartas.length);
+				if(vetor[i] == 0)
+					verifica = false;
+
+				}
+				vetor[i]=1;
+				var path = "img/" + cartas[i].numero + cartas[i].naipe + ".png";
+				var newImage = document.createElement("img");
+				newImage.setAttribute('src', path);
+				newImage.setAttribute('width', '135px');
+				var div2 = document.getElementById("deck2");
+				div2.appendChild(newImage);
 			}
 		};
 
 		function exibeCartas(){
+
 			for(var i = 0; i < cartas.length; i++){
 				console.log("Naipe da carta: " + cartas[i].naipe + " | Numero da carta: " + cartas[i].numero);
 			}
+			
 		}
 
-		function verifica(){
+		// function exibePar(){
+
+
+		// 	for(var i = 0; i < cartas.length; i++){
+		// 		console.log("Naipe da carta: " + cartas[i].naipe + " | Numero da carta: " + cartas[i].numero);
+		// 	}
+			
+		// }
+
+		function verifica(numero){
 			var variety = 0;
+
 			for (var i = 0; i < cartas.length; i++){
-				if (cartas[i].numero == this.numero){
-					variety++;
+				//console.log(cartas[i].numero+" - " +numero );
+				if (cartas[i].numero == numero){
+					//alert(cartas[i].numero);
+					variety++;	
 				}
 			}
 			return variety;
@@ -56,30 +97,84 @@
 			this.naipe = setNaipe();
 
 			function setNaipe(){
-				var variety = verifica();
+				var variety = verifica(numero);
 
 				if(variety == 0){
 					var proximo = Math.floor(Math.random() * naipes.length);
-					console.log("passou aqui");
+					// console.log("numero nao consta no baralho");	
+					// console.log("numero "+ numero+ " naipe "+naipes[proximo]);
 					return naipes[proximo];
 
 				}
 				else{
-					for(var i = 0; i < cartas.length; i++){
-						for(var j = 0; j < naipes.length; j++){
-							if(cartas[i].numero == this.numero && cartas[i].naipe != naipes[j]){
-								console.log("Naipe escolhido foi: " + naipes[j]);
-								return naipes[j];
+					
+				
+					var ver=true;
+					var n ;
+					//console.log("Troca naipe -> Numero "+ numero  );
+
+					for(var i = 0; i < cartas.length; i++)
+					{	
+						if(cartas[i].numero == numero )
+						{
+							
+							while(ver){
+								n = Math.floor(Math.random() * naipes.length);
+								//console.log(" naipe sortiado"+naipes[n]);
+								ver=testa(i, naipes[n]);
+
 							}
+
+						//console.log("naipe escolhido "+ naipes[n]);
+						return naipes[n];
 						}
+						
+						
 					}
+
+
+					
 				}
 			}
 		}; //Fim do objeto
 
+		//verifica se o numero da carta sorteada é igual a algum numero que ja existe no baralho e se o nipe sorteado ja existe no baralho
+		function testa(index, n){
+			
 
-		createElements(); //Chamando a função para criar novas cartas
+			for(var i = 0; i < cartas.length; i++)
+			{
+				if((cartas[index].numero== cartas[i].numero) && (cartas[i].naipe == n)){
+					//console.log("naipe existe ");
+					// console.log(" naipes dentr: "+ cartas[index].naipe);
+					return true;
+				}
+
+			}
+
+			 //console.log("naipe nao existe");
+			return false;
+
+
+
+		}
+
+		createElements(); 
+		selectCards();//Chamando a função para criar novas cartas
 		exibeCartas(); //exibe cartas criadas no console
+		// exibePar(); 
+
+		// var par = new Carta();
+		// var par = new Array(cartas.length);
+		// for(var i = 0; i < cartas.length; i++)
+		// {
+		// 	var num = Math.floor(Math.random() * cartas.length);
+		// 	par[num] = cartas[i];
+		// }
+
+		// for(var i = 0; i < cartas.length; i++){
+		// 		console.log("Naipe da carta: " + par[i].naipe + " | Numero da carta: " + par[i].numero);
+		// 	}
 
 	</script>
 </body>
