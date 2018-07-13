@@ -134,15 +134,22 @@
 			if(isTurned){		
 				var path = getImage(id);
 				carta.setAttribute('src',path);
-				turnedCard = {'id': id, 'match': generateMatch(id)};
+				//turnedCard = {'id': id, 'match': generateMatch(id)};
 				if(turnedCard.match == id){
 					pontos++;
-					exibePontuacao();
-					// carta.setAttribute('onclick','');
-					// var otherCard = document.getElementById(turnedCard.id);
-					// outra.setAttribute('onclick','');
 					alert("Você recebeu 1 ponto!");
+					exibePontuacao();
+					 carta.setAttribute('onclick','');
+					 var otherCard = document.getElementById(turnedCard.id);
+					 otherCard.setAttribute('onclick','');
+					 turnedCard = {};
+					 isTurned = false;
+
+					 if(pontos == 10){
+					 	alert("Cê ganhou! Obrigado por perder seu tempo conosco!");
+					 }
 				}
+
 				else{
 					var path = "img/verso.jpg";
 					carta.setAttribute('src',path);
