@@ -26,23 +26,26 @@
 		<h3 class="linha">Nome: <span id="nome"></span>  Idade: <span id="idade"></span></h3>
 		<h2 id="pontuation"></h2>
 
-		<div class="row">
+		<div >
 			
 			<div  id="tempo">
 				<span id="cronometro" class="hora"></span>
 
 			</div>
 
-			<div class="col-md-4">
+			<div >
 				
 			</div>
 			
 		
 	  </div>
-	  <br>
-	  <div id="deck" ></div>
-	  <div id="deck2"></div>
+	 </div>
 
+	  <br>
+	  <div style="text-align: center">
+	  	<div id="deck" ></div>
+	  	<div id="deck2"></div>
+	  </div>
 	
 
 
@@ -129,8 +132,9 @@
 			var carta = document.getElementById(id);
 			console.log(id);
 			if(isTurned){		
-				// var path = getImage(id);
-				// carta.setAttribute('src',path);
+				var path = getImage(id);
+				carta.setAttribute('src',path);
+				turnedCard = {'id': id, 'match': generateMatch(id)};
 				if(turnedCard.match == id){
 					pontos++;
 					exibePontuacao();
