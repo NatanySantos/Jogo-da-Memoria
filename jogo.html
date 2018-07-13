@@ -9,7 +9,7 @@
 
 <body>
 	<h1> testando </h1>
-
+	<h2 id="pontuation"></h2>
 	<div id="deck" ></div>
 	<div id="deck2"></div>
 
@@ -17,19 +17,24 @@
 	<script type="text/javascript">
 
 		var totalCards = 20;
-
+		var pontos = 0;
 		var naipes = ["E","O","P","C"];
 		var cartas = [];
-
+		var isTurned = false;
+		var turnedCard;
 
 		function createElements(){
 			for(var i = 1; i <= 10; i++){
 				var cardNumber = Math.floor(Math.random() * 13 + 1);
 				var newCard = new Carta(cardNumber);
 				var newImage = document.createElement("img");
-				var path = "img/" + newCard.numero + newCard.naipe + ".png";
+				var path = "img/verso.jpg";
+				//var path = "img/" + newCard.numero + newCard.naipe + ".png";
+				var id = newCard.numero + newCard.naipe; 
 				newImage.setAttribute('src', path);
 				newImage.setAttribute('width', '135px');
+				newImage.setAttribute('id',id);
+				newImage.setAttribute('onclick','turnCard(this.id);')
 				var div = document.getElementById("deck");
 				div.appendChild(newImage);
 				cartas.push(newCard);
@@ -44,39 +49,65 @@
 
 			for(var j = 1; j<= 10; j++){
 				verifica = true;
-				
+				var i;
 				while(verifica){
-				var i = Math.floor(Math.random() * cartas.length);
+				i = Math.floor(Math.random() * cartas.length);
 				if(vetor[i] == 0)
 					verifica = false;
 
 				}
 				vetor[i]=1;
-				var path = "img/" + cartas[i].numero + cartas[i].naipe + ".png";
+				var path = "img/verso.jpg";
+				//var path = "img/" + cartas[i].numero + cartas[i].naipe + ".png";
 				var newImage = document.createElement("img");
+				var id = cartas[i].numero + cartas[i].naipe;
 				newImage.setAttribute('src', path);
 				newImage.setAttribute('width', '135px');
+				newImage.setAttribute('id', id);
+				newImage.setAttribute('onclick','turnCard(this.id);')
 				var div2 = document.getElementById("deck2");
 				div2.appendChild(newImage);
 			}
 		};
 
 		function exibeCartas(){
-
 			for(var i = 0; i < cartas.length; i++){
 				console.log("Naipe da carta: " + cartas[i].naipe + " | Numero da carta: " + cartas[i].numero);
-			}
-			
+			}	
 		}
 
-		// function exibePar(){
+		function exibePontuacao(){
+			var placar = document.getElementById('pontuation');
+			placar.innerHTML = pontos;
+		}
 
+		function turnCard(id){
+			var carta = document.getElementById(id);
+			if(isTurned){
+				if(turnedCard.id == id){
+					pontos++;
+					exibePontuacao();
+				}
+				else{
+					var path = "img/verso.jpg";
+					carta.setAttribute('src',path);
+					var otherCard = document.getElementById(turnedCard.id);
+					otherCard.setAttribute('src',path);
+					isTurned = false;
+				}
+			}
+			else{
+				var path = "img/" + id + ".png";
+				carta.setAttribute('src',path);
+				turnedCard = {'id': id};
+				isTurned = true;
+			}
+		}
 
-		// 	for(var i = 0; i < cartas.length; i++){
-		// 		console.log("Naipe da carta: " + cartas[i].naipe + " | Numero da carta: " + cartas[i].numero);
-		// 	}
-			
-		// }
+		function turnAll(){
+
+		}
+
 
 		function verifica(numero){
 			var variety = 0;
