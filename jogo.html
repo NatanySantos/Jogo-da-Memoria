@@ -24,17 +24,19 @@
 	  <div class="container">
 	  	<h1 class="titulo"> Bem-vindo(a) </h1>
 		<h3 class="linha">Nome: <span id="nome"></span>  Idade: <span id="idade"></span></h3>
-		<h2 id="pontuation"></h2>
+		
 
-		<div >
+		<div class="row">
 			
-			<div  id="tempo">
-				<span id="cronometro" class="hora"></span>
+			<div id="tempo" >
+				<span style="color: red; left: 30%; top: 60%; width: 40%; text-align: center; position: absolute; font-size: 45px;" id="cronometro" ></span>
 
 			</div>
-
-			<div >
-				
+			<div class="col-md-4"></div>
+			<div class="col-md-4" >
+				<h2 > Pontuação: 
+					<span id="pontuation"></span>
+				</h2>
 			</div>
 			
 		
@@ -58,6 +60,8 @@
 		var cartas = [];
 		var isTurned = false;
 		var turnedCard;
+		var tempo = 160;
+		//var timeId = null; //variavel que armazena a chamada da funcao Timeout
 
 			//pegando os dados do usuario
 			var url = window.location.search.replace("?", "");
@@ -68,7 +72,7 @@
 			console.log(nome);
 			console.log(idade);
 
-			document.getElementById('cronometro').innerHTML = 160;
+			document.getElementById('cronometro').innerHTML = tempo;
 
 		function createElements(){
 			for(var i = 1; i <= 10; i++){
@@ -137,6 +141,7 @@
 				turnedCard = {'id': id, 'match': generateMatch(id)};
 				if(turnedCard.match == id){
 					pontos++;
+					tempo ++;
 					exibePontuacao();
 					// carta.setAttribute('onclick','');
 					// var otherCard = document.getElementById(turnedCard.id);
@@ -149,6 +154,7 @@
 					var otherCard = document.getElementById(turnedCard.id);
 					otherCard.setAttribute('src',path);
 					isTurned = false;
+					tempo --;
 				}
 			}
 			else{
@@ -187,6 +193,12 @@
 		function turnAll(){
 
 		}
+
+			document.getElementById('cronometro').innerHTML = tempo;
+
+			//executa essa funcao a cada milisegundos
+			//timeId = setTimeout("contagem("+segundos+")", 1000);
+		//}
 
 
 		function verifica(numero){
@@ -268,6 +280,28 @@
 
 
 		}
+
+		// function contagem(segundos) {
+
+		// 	segundos --;
+
+		// 	if (segundos == -1) {
+		// 		clearTimeout(timeId); //para a execução da função do setTimeout
+		// 		game_over();
+		// 		return false;
+		// 	}
+
+
+		// function parar_jogo() {
+		// 	clearTimeout(timeId);
+		// }
+
+		// function game_over() {
+		// 	remove_eventos_cartas();
+		// 	alert('Fim de jogo, voce nao conseguiu encontrar todos os pares a tempo.');
+		// }
+
+
 
 		createElements(); 
 		selectCards();//Chamando a função para criar novas cartas
