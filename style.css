@@ -1,0 +1,27 @@
+.titulo {
+	text-align: center;
+	text-shadow: 1px 1px black;
+}
+
+.linha{
+	border-bottom-style: solid;
+	border-color: #4F4F4F;
+	border-width: 2px;
+
+}
+
+#tempo {
+	width: 210px; 
+	height: 240px;
+	background: url('img/tempo.png');
+	border: 1px solid red;
+/*	text-align: center;
+	color: red;
+	font-size: 30px;"*/
+}
+
+#hora {
+	color: red; 
+	font-size: 30px;
+	text-align: bottom;
+}

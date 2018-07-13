@@ -4,24 +4,71 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Jogo da Memoria</title>
 </head>
 
 <body>
-	<h1> testando </h1>
-	<h2 id="pontuation"></h2>
-	<div id="deck" ></div>
-	<div id="deck2"></div>
+	<nav class="navbar navbar-dark bg-dark">
+		<div class="container">
+			<div class="navbar-header">
+		  		<a class="navbar-brand" href="#"></a>
+			
+			</div>
+		</div>
+	</nav>
+	<!-- <div class="col-md-2"></div>
+	<div class="col-sm-8" -->
+	  <br><br> 
+
+	  <div class="container">
+	  	<h1 class="titulo"> Bem-vindo(a) </h1>
+		<h3 class="linha">Nome: <span id="nome"></span>  Idade: <span id="idade"></span></h3>
+		<h2 id="pontuation"></h2>
+
+		<div >
+			
+			<div  id="tempo">
+				<span id="cronometro" class="hora"></span>
+
+			</div>
+
+			<div >
+				
+			</div>
+			
+		
+	  </div>
+	 </div>
+
+	  <br>
+	  <div style="text-align: center">
+	  	<div id="deck" ></div>
+	  	<div id="deck2"></div>
+	  </div>
+	
 
 
 	<script type="text/javascript">
-
+	
+	
 		var totalCards = 20;
 		var pontos = 0;
 		var naipes = ["E","O","P","C"];
 		var cartas = [];
 		var isTurned = false;
 		var turnedCard;
+
+			//pegando os dados do usuario
+			var url = window.location.search.replace("?", "");
+			var nome = url.split("&")[0];
+			var idade = url.split("&")[1];
+			document.getElementById("nome").innerHTML = nome;
+			document.getElementById("idade").innerHTML = idade;
+			console.log(nome);
+			console.log(idade);
+
+			document.getElementById('cronometro').innerHTML = 160;
 
 		function createElements(){
 			for(var i = 1; i <= 10; i++){
@@ -83,10 +130,17 @@
 
 		function turnCard(id){
 			var carta = document.getElementById(id);
-			if(isTurned){
+			console.log(id);
+			if(isTurned){		
+				var path = getImage(id);
+				carta.setAttribute('src',path);
+				turnedCard = {'id': id, 'match': generateMatch(id)};
 				if(turnedCard.match == id){
 					pontos++;
 					exibePontuacao();
+					// carta.setAttribute('onclick','');
+					// var otherCard = document.getElementById(turnedCard.id);
+					// outra.setAttribute('onclick','');
 					alert("Você recebeu 1 ponto!");
 				}
 				else{
@@ -218,19 +272,8 @@
 		createElements(); 
 		selectCards();//Chamando a função para criar novas cartas
 		exibeCartas(); //exibe cartas criadas no console
-		// exibePar(); 
 
-		// var par = new Carta();
-		// var par = new Array(cartas.length);
-		// for(var i = 0; i < cartas.length; i++)
-		// {
-		// 	var num = Math.floor(Math.random() * cartas.length);
-		// 	par[num] = cartas[i];
-		// }
-
-		// for(var i = 0; i < cartas.length; i++){
-		// 		console.log("Naipe da carta: " + par[i].naipe + " | Numero da carta: " + par[i].numero);
-		// 	}
+		
 
 	</script>
 </body>
