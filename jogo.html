@@ -60,7 +60,7 @@
 				var path = "img/verso.jpg";
 				//var path = "img/" + cartas[i].numero + cartas[i].naipe + ".png";
 				var newImage = document.createElement("img");
-				var id = cartas[i].numero + cartas[i].naipe;
+				var id = "second" + cartas[i].numero + cartas[i].naipe;
 				newImage.setAttribute('src', path);
 				newImage.setAttribute('width', '135px');
 				newImage.setAttribute('id', id);
@@ -84,9 +84,10 @@
 		function turnCard(id){
 			var carta = document.getElementById(id);
 			if(isTurned){
-				if(turnedCard.id == id){
+				if(turnedCard.match == id){
 					pontos++;
 					exibePontuacao();
+					alert("Você recebeu 1 ponto!");
 				}
 				else{
 					var path = "img/verso.jpg";
@@ -97,10 +98,35 @@
 				}
 			}
 			else{
-				var path = "img/" + id + ".png";
+				var path = getImage(id);
 				carta.setAttribute('src',path);
-				turnedCard = {'id': id};
+				turnedCard = {'id': id, 'match': generateMatch(id)};
 				isTurned = true;
+			}
+		}
+
+		function getImage(id){
+			var identity = checkId(id);
+			return "img/" + identity + ".png";
+		}
+
+		function generateMatch(id){
+			var identity = id.toString();
+			if(identity.startsWith("second")){
+				identity.replace("second","");
+				return identity;
+			}else{
+				identity = "second"+identity;
+				return identity;
+			}
+		}
+		function checkId(id){
+			var identity = id.toString();
+			if(identity.startsWith("second")){
+				iden = identity.replace("second","");
+				return iden;
+			}else{
+				return identity;
 			}
 		}
 
@@ -111,7 +137,6 @@
 
 		function verifica(numero){
 			var variety = 0;
-
 			for (var i = 0; i < cartas.length; i++){
 				//console.log(cartas[i].numero+" - " +numero );
 				if (cartas[i].numero == numero){
