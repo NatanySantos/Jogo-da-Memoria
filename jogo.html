@@ -61,7 +61,7 @@
 		var isTurned = false;
 		var turnedCard;
 		var tempo = 160;
-		//var timeId = null; //variavel que armazena a chamada da funcao Timeout
+		var timeId = null; //variavel que armazena a chamada da funcao Timeout
 
 			//pegando os dados do usuario
 			var url = window.location.search.replace("?", "");
@@ -134,14 +134,14 @@
 
 		function turnCard(id){
 			var carta = document.getElementById(id);
-			console.log(id);
+			contagem(tempo + 1);
+			//console.log(id);
 			if(isTurned){		
 				var path = getImage(id);
 				carta.setAttribute('src',path);
 				//turnedCard = {'id': id, 'match': generateMatch(id)};
 				if(turnedCard.match == id){
 					pontos++;
-					tempo ++;
 					alert("Você recebeu 1 ponto!");
 					exibePontuacao();
 					 carta.setAttribute('onclick','');
@@ -161,7 +161,6 @@
 					var otherCard = document.getElementById(turnedCard.id);
 					otherCard.setAttribute('src',path);
 					isTurned = false;
-					tempo --;
 				}
 			}
 			else{
@@ -294,7 +293,7 @@
 
 		// 	if (segundos == -1) {
 		// 		clearTimeout(timeId); //para a execução da função do setTimeout
-		// 		game_over();
+		// 		//game_over();
 		// 		return false;
 		// 	}
 
