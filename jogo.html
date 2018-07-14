@@ -136,8 +136,8 @@
 				carta.setAttribute('src',path);
 				//turnedCard = {'id': id, 'match': generateMatch(id)};
 				if(turnedCard.match == id){
-					pontos++;
-					alert("Você recebeu 1 ponto!");
+					pontos = pontos + turnedCard.points;
+					alert("Você recebeu " + turnedCard.points + " ponto(s)!");
 					exibePontuacao();
 					 carta.setAttribute('onclick','');
 					 var otherCard = document.getElementById(turnedCard.id);
@@ -161,7 +161,7 @@
 			else{
 				var path = getImage(id);
 				carta.setAttribute('src',path);
-				turnedCard = {'id': id, 'match': generateMatch(id)};
+				turnedCard = {'id': id, 'match': generateMatch(id), 'points' : setPoints(id)};
 				isTurned = true;
 			}
 		}
@@ -188,6 +188,18 @@
 				return iden;
 			}else{
 				return identity;
+			}
+		}
+
+		function setPoints(id){
+			var iden = checkId(id);
+			var middle = iden.substring(0,2);
+			var integer = parseInt(middle);
+			if(integer >= 10){
+				return 5;
+			}
+			else{
+				return 1;
 			}
 		}
 
