@@ -17,8 +17,6 @@
 			</div>
 		</div>
 	</nav>
-	<!-- <div class="col-md-2"></div>
-	<div class="col-sm-8" -->
 	  <br><br> 
 
 	  <div class="container">
@@ -62,7 +60,6 @@
 		var cartas = [];
 		var isTurned = false;
 		var turnedCard;
-		//var timeId = null; //variavel que armazena a chamada da funcao Timeout
 
 			//pegando os dados do usuario
 			var url = window.location.search.replace("?", "");
@@ -73,7 +70,6 @@
 			console.log(nome);
 			console.log(idade);
 
-			//document.getElementById('cronometro').innerHTML = tempo;
 
 		function createElements(){
 			for(var i = 1; i <= 10; i++){
@@ -135,8 +131,6 @@
 
 		function turnCard(id){
 			var carta = document.getElementById(id);
-			//contagem(tempo +1);
-			//console.log(id);
 			if(isTurned){		
 				var path = getImage(id);
 				carta.setAttribute('src',path);
@@ -229,9 +223,7 @@
 		function verifica(numero){
 			var variety = 0;
 			for (var i = 0; i < cartas.length; i++){
-				//console.log(cartas[i].numero+" - " +numero );
 				if (cartas[i].numero == numero){
-					//alert(cartas[i].numero);
 					variety++;	
 				}
 			}
@@ -256,7 +248,7 @@
 				
 					var ver=true;
 					var n ;
-					//console.log("Troca naipe -> Numero "+ numero  );
+					//"Trocar naipe
 
 					for(var i = 0; i < cartas.length; i++)
 					{	
@@ -265,12 +257,12 @@
 							
 							while(ver){
 								n = Math.floor(Math.random() * naipes.length);
-								//console.log(" naipe sortiado"+naipes[n]);
+								// naipe sorteado
 								ver=testa(i, naipes[n]);
 
 							}
 
-						//console.log("naipe escolhido "+ naipes[n]);
+						//naipe escolhido
 						return naipes[n];
 						}
 						
@@ -289,14 +281,13 @@
 			for(var i = 0; i < cartas.length; i++)
 			{
 				if((cartas[index].numero== cartas[i].numero) && (cartas[i].naipe == n)){
-					//console.log("naipe existe ");
-					// console.log(" naipes dentr: "+ cartas[index].naipe);
+					//naipe existe
 					return true;
 				}
 
 			}
 
-			 //console.log("naipe nao existe");
+			 //naipe nao existe
 			return false;
 		}
 
