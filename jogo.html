@@ -61,7 +61,7 @@
 		var isTurned = false;
 		var turnedCard;
 		var tempo = 160;
-		var timeId = null; //variavel que armazena a chamada da funcao Timeout
+		//var timeId = null; //variavel que armazena a chamada da funcao Timeout
 
 			//pegando os dados do usuario
 			var url = window.location.search.replace("?", "");
@@ -134,7 +134,7 @@
 
 		function turnCard(id){
 			var carta = document.getElementById(id);
-			contagem(tempo + 1);
+			//contagem(tempo +1);
 			//console.log(id);
 			if(isTurned){		
 				var path = getImage(id);
@@ -200,7 +200,7 @@
 
 		}
 
-			document.getElementById('cronometro').innerHTML = tempo;
+			//document.getElementById('cronometro').innerHTML = tempo;
 
 			//executa essa funcao a cada milisegundos
 			//timeId = setTimeout("contagem("+segundos+")", 1000);
@@ -292,10 +292,24 @@
 		// 	segundos --;
 
 		// 	if (segundos == -1) {
-		// 		clearTimeout(timeId); //para a execução da função do setTimeout
+		// 		alert("Acabou");
+		// 		//clearTimeout(timeId); //para a execução da função do setTimeout
 		// 		//game_over();
-		// 		return false;
+		// 		//return false;
 		// 	}
+
+			// function contagem_tempo(){	             
+	   
+			// 	document.contador.segundos.value = segundos; 
+			// 	segundos = segundos - 1;
+
+			// 	if (segundos == -1) {
+			// 		segundos = 0;
+			// 	}   
+				               
+			// 	timerID = setTimeout("contagem_tempo()",1000);   
+			// }     
+
 
 
 		// function parar_jogo() {
