@@ -11,17 +11,23 @@
 }
 
 #tempo {
-	width: 210px; 
-	height: 240px;
-	background: url('img/tempo.png');
-	border: 1px solid red;
+	width: 170px; 
+	height: 200px;
+	background: url('img/tempo.png' );
+	background-size: 170px 200px ;
+	position: relative;
+	/*border: 1px solid red;*/
 /*	text-align: center;
 	color: red;
 	font-size: 30px;"*/
 }
 
 #hora {
-	color: red; 
-	font-size: 30px;
-	text-align: bottom;
+	position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 100px;
+
 }
