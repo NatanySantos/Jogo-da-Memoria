@@ -42,6 +42,7 @@
 		
 	  </div>
 	  <button type="button" onclick="location.reload()">Recomeçar o jogo</button>
+	    <button type="button" onclick="turnAll()">Turn all</button>
 	 </div>
 
 	  <br>
@@ -54,7 +55,7 @@
 
 	<script type="text/javascript">
 	
-		var time = 30;
+		var time = 120;
 		var totalCards = 0;
 		var pontos = 0;
 		var naipes = ["E","O","P","C"];
@@ -143,6 +144,7 @@
 				if(turnedCard.match == id){
 					pontos = pontos + turnedCard.points;
 					alert("Você recebeu " + turnedCard.points + " ponto(s)!");
+					increaseTime(turnedCard.points);
 					exibePontuacao();
 					 carta.setAttribute('onclick','');
 					 var otherCard = document.getElementById(turnedCard.id);
@@ -202,7 +204,6 @@
 			var middle = iden.substring(0,2);
 			var integer = parseInt(middle);
 			if(integer >= 10){
-				time = time + 10;
 				return 5;
 			}
 			else{
@@ -210,9 +211,20 @@
 			}
 		}
 
-		function turnAll(){
-
+		function increaseTime(points){
+			if(points == 5){
+				time = time + 10;
+			}
 		}
+
+		function turnAll(){
+			for(var i = 0; i < 10; i++){
+				var card = document.getElementById(cartas[i].numero+cartas[i].naipe);
+				card.setAttribute('onclick', '');	
+				card.setAttribute('src', getImage(cartas[i].numero+cartas[i].naipe));
+    		}
+		}
+
 
 		function verifica(numero){
 			var variety = 0;
@@ -306,7 +318,7 @@
 		 		alert("Cê ganhou! Obrigado por perder seu tempo conosco!");
 		 	}
 		 	
-		 	time = 30;
+		 	time = 120;
 		 }
 
 
