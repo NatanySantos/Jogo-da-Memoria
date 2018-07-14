@@ -55,7 +55,7 @@
 
 	<script type="text/javascript">
 	
-		var time = 120;
+		var time = 30;
 		var totalCards = 0;
 		var pontos = 0;
 		var naipes = ["E","O","P","C"];
@@ -203,7 +203,7 @@
 			var iden = checkId(id);
 			var middle = iden.substring(0,2);
 			var integer = parseInt(middle);
-			if(integer >= 10){
+			if(integer > 10){
 				return 5;
 			}
 			else{
@@ -222,6 +222,9 @@
 				var card = document.getElementById(cartas[i].numero+cartas[i].naipe);
 				card.setAttribute('onclick', '');	
 				card.setAttribute('src', getImage(cartas[i].numero+cartas[i].naipe));
+				var card = document.getElementById("second"+cartas[i].numero+cartas[i].naipe);
+				card.setAttribute('onclick', '');	
+				card.setAttribute('src', getImage("second"+cartas[i].numero+cartas[i].naipe));
     		}
 		}
 
@@ -312,13 +315,14 @@
 
 		 function game_over(){
 		 	clearInterval(myVar);
-		 	if(time == -1 && pontos < 10){
+		 	if(time == -1 && totalCards < 10){
+		 		turnAll();
 		 		alert("Você perdeu!");
 		 	}else{
-		 		alert("Cê ganhou! Obrigado por perder seu tempo conosco!");
+		 		alert("Cê ganhou! Parabéns!");
 		 	}
 		 	
-		 	time = 120;
+		 	time = 30;
 		 }
 
 
