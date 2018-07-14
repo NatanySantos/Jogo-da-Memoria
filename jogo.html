@@ -17,8 +17,6 @@
 			</div>
 		</div>
 	</nav>
-	<!-- <div class="col-md-2"></div>
-	<div class="col-sm-8" -->
 	  <br><br> 
 
 	  <div class="container">
@@ -54,7 +52,7 @@
 
 
 	<script type="text/javascript">
-	
+		//variáveis globais
 		var time = 30;
 		var totalCards = 0;
 		var pontos = 0;
@@ -62,18 +60,16 @@
 		var cartas = [];
 		var isTurned = false;
 		var turnedCard;
-		//var timeId = null; //variavel que armazena a chamada da funcao Timeout
 
-			//pegando os dados do usuario
-			var url = window.location.search.replace("?", "");
-			var nome = url.split("&")[0];
-			var idade = url.split("&")[1];
-			document.getElementById("nome").innerHTML = nome;
-			document.getElementById("idade").innerHTML = idade;
-			console.log(nome);
-			console.log(idade);
+		//pegando os dados do usuario
+		var url = window.location.search.replace("?", "");
+		var nome = url.split("&")[0];
+		var idade = url.split("&")[1];
+		document.getElementById("nome").innerHTML = nome;
+		document.getElementById("idade").innerHTML = idade;
+		console.log(nome);
+		console.log(idade);
 
-			//document.getElementById('cronometro').innerHTML = tempo;
 
 		function createElements(){
 			for(var i = 1; i <= 10; i++){
@@ -81,7 +77,6 @@
 				var newCard = new Carta(cardNumber);
 				var newImage = document.createElement("img");
 				var path = "img/verso.jpg";
-				//var path = "img/" + newCard.numero + newCard.naipe + ".png";
 				var id = newCard.numero + newCard.naipe; 
 				newImage.setAttribute('src', path);
 				newImage.setAttribute('width', '135px');
@@ -110,7 +105,6 @@
 				}
 				vetor[i]=1;
 				var path = "img/verso.jpg";
-				//var path = "img/" + cartas[i].numero + cartas[i].naipe + ".png";
 				var newImage = document.createElement("img");
 				var id = "second" + cartas[i].numero + cartas[i].naipe;
 				newImage.setAttribute('src', path);
@@ -135,12 +129,9 @@
 
 		function turnCard(id){
 			var carta = document.getElementById(id);
-			//contagem(tempo +1);
-			//console.log(id);
 			if(isTurned){		
 				var path = getImage(id);
 				carta.setAttribute('src',path);
-				//turnedCard = {'id': id, 'match': generateMatch(id)};
 				if(turnedCard.match == id){
 					pontos = pontos + turnedCard.points;
 					alert("Você recebeu " + turnedCard.points + " ponto(s)!");
@@ -232,9 +223,7 @@
 		function verifica(numero){
 			var variety = 0;
 			for (var i = 0; i < cartas.length; i++){
-				//console.log(cartas[i].numero+" - " +numero );
 				if (cartas[i].numero == numero){
-					//alert(cartas[i].numero);
 					variety++;	
 				}
 			}
@@ -259,7 +248,6 @@
 				
 					var ver=true;
 					var n ;
-					//console.log("Troca naipe -> Numero "+ numero  );
 
 					for(var i = 0; i < cartas.length; i++)
 					{	
@@ -268,12 +256,9 @@
 							
 							while(ver){
 								n = Math.floor(Math.random() * naipes.length);
-								//console.log(" naipe sortiado"+naipes[n]);
 								ver=testa(i, naipes[n]);
 
 							}
-
-						//console.log("naipe escolhido "+ naipes[n]);
 						return naipes[n];
 						}
 						
@@ -292,14 +277,9 @@
 			for(var i = 0; i < cartas.length; i++)
 			{
 				if((cartas[index].numero== cartas[i].numero) && (cartas[i].naipe == n)){
-					//console.log("naipe existe ");
-					// console.log(" naipes dentr: "+ cartas[index].naipe);
 					return true;
 				}
-
 			}
-
-			 //console.log("naipe nao existe");
 			return false;
 		}
 
@@ -327,8 +307,8 @@
 
 
 		createElements(); 
-		selectCards();//Chamando a função para criar novas cartas
-		exibeCartas(); //exibe cartas criadas no console
+		selectCards();
+		exibeCartas(); 
 		var myVar = setInterval(timing, 1000);
 		
 
