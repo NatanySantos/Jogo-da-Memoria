@@ -41,6 +41,7 @@
 			
 		
 	  </div>
+	  <button type="button" onclick="location.reload()">Recomeçar o jogo</button>
 	 </div>
 
 	  <br>
@@ -53,14 +54,13 @@
 
 	<script type="text/javascript">
 	
-	
-		var totalCards = 20;
+		var time = 30;
+		var totalCards = 0;
 		var pontos = 0;
 		var naipes = ["E","O","P","C"];
 		var cartas = [];
 		var isTurned = false;
 		var turnedCard;
-		var tempo = 160;
 		//var timeId = null; //variavel que armazena a chamada da funcao Timeout
 
 			//pegando os dados do usuario
@@ -72,7 +72,7 @@
 			console.log(nome);
 			console.log(idade);
 
-			document.getElementById('cronometro').innerHTML = tempo;
+			//document.getElementById('cronometro').innerHTML = tempo;
 
 		function createElements(){
 			for(var i = 1; i <= 10; i++){
@@ -149,9 +149,10 @@
 					 otherCard.setAttribute('onclick','');
 					 turnedCard = {};
 					 isTurned = false;
+					 totalCards++;
 
-					 if(pontos == 10){
-					 	alert("Cê ganhou! Obrigado por perder seu tempo conosco!");
+					 if(totalCards == 10){
+					 	game_over();
 					 }
 				}
 
@@ -201,6 +202,7 @@
 			var middle = iden.substring(0,2);
 			var integer = parseInt(middle);
 			if(integer >= 10){
+				time = time + 10;
 				return 5;
 			}
 			else{
@@ -211,13 +213,6 @@
 		function turnAll(){
 
 		}
-
-			//document.getElementById('cronometro').innerHTML = tempo;
-
-			//executa essa funcao a cada milisegundos
-			//timeId = setTimeout("contagem("+segundos+")", 1000);
-		//}
-
 
 		function verifica(numero){
 			var variety = 0;
@@ -277,8 +272,7 @@
 		}; //Fim do objeto
 
 		//verifica se o numero da carta sorteada é igual a algum numero que ja existe no baralho e se o nipe sorteado ja existe no baralho
-		function testa(index, n){
-			
+		function testa(index, n){	
 
 			for(var i = 0; i < cartas.length; i++)
 			{
@@ -292,51 +286,34 @@
 
 			 //console.log("naipe nao existe");
 			return false;
-
-
-
 		}
 
-		// function contagem(segundos) {
-
-		// 	segundos --;
-
-		// 	if (segundos == -1) {
-		// 		alert("Acabou");
-		// 		//clearTimeout(timeId); //para a execução da função do setTimeout
-		// 		//game_over();
-		// 		//return false;
-		// 	}
-
-			// function contagem_tempo(){	             
-	   
-			// 	document.contador.segundos.value = segundos; 
-			// 	segundos = segundos - 1;
-
-			// 	if (segundos == -1) {
-			// 		segundos = 0;
-			// 	}   
-				               
-			// 	timerID = setTimeout("contagem_tempo()",1000);   
-			// }     
 
 
+		 function timing(){
+		 	time--;
+		 	if(time == -1){
+		 		game_over();
+		 	}
+		 	document.getElementById('cronometro').innerHTML = time;
+		 }
 
-		// function parar_jogo() {
-		// 	clearTimeout(timeId);
-		// }
-
-		// function game_over() {
-		// 	remove_eventos_cartas();
-		// 	alert('Fim de jogo, voce nao conseguiu encontrar todos os pares a tempo.');
-		// }
-
+		 function game_over(){
+		 	clearInterval(myVar);
+		 	if(time == -1 && pontos < 10){
+		 		alert("Você perdeu!");
+		 	}else{
+		 		alert("Cê ganhou! Obrigado por perder seu tempo conosco!");
+		 	}
+		 	
+		 	time = 30;
+		 }
 
 
 		createElements(); 
 		selectCards();//Chamando a função para criar novas cartas
 		exibeCartas(); //exibe cartas criadas no console
-
+		var myVar = setInterval(timing, 1000);
 		
 
 	</script>
